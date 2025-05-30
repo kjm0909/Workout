@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="product"
+            type="com.kurly.kjm.kurlytest.data.SectionProductData" />
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="4dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="6:4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{product.image}"
+                tools:srcCompat="@tools:sample/avatars"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{product.name}"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                tools:text="마켓컬리 상품명"
+                android:layout_marginVertical="4dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgProduct"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDiscountRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/red"
+                app:visibleGoneIf="@{product.isTextVisible}"
+                app:original="@{product.originalPrice}"
+                app:discounted="@{product.discountedPrice}"
+                app:layout_constraintTop_toTopOf="@+id/tvDiscountedPrice"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tvDiscountedPrice"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDiscountedPrice"
+                tools:text="30%"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDiscountedPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                app:discountedPrice="@{product.discountedPrice}"
+                app:originalPrice="@{product.originalPrice}"
+                tools:text="7,000원"
+                app:layout_goneMarginStart="0dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toEndOf="@+id/tvDiscountRate"
+                app:layout_constraintEnd_toStartOf="@+id/tvOriginalPrice"
+                app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvOriginalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                visibleGoneIf="@{product.isTextVisible}"
+                app:originalFlagPrice="@{product.originalPrice}"
+                tools:text="10,000원"
+                app:layout_goneMarginStart="0dp"
+                android:layout_marginStart="4dp"
+                app:layout_constraintStart_toEndOf="@+id/tvDiscountedPrice"
+                app:layout_constraintTop_toTopOf="@+id/tvDiscountedPrice"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDiscountedPrice"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnFavorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:padding="2dp"
+                app:isFavorite="@{product.isFavorite}"
+                tools:srcCompat="@drawable/ic_btn_heart_off"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
